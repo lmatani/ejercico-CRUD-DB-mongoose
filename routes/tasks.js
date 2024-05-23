@@ -41,6 +41,34 @@ router.get("/id/:id", async(req, res) => {
     }
 });
 
+router.put("/id/:id", async(req, res) => {
+    try {  
+        const {id}= req.params;
+        const {title, completed} = req.body;
+         const result = await Task.updateOne({ id: `${id}`},{$set: { title: `${title}`}}).exec();
+        res.status(200).send(result);
+    } catch (error) {
+        console.error(error);
+        res
+            .status(500)
+            .send({ message: "There was a problem trying to update name of task by ID" });
+    }
+});
+
+router.put("/markAsCompleted/:id", async(req, res) => {
+    try {  
+        const {id}= req.params;
+        const {title, completed} = req.body;
+         const result = await Task.updateOne({ id: `${id}`},{$set: { completed: `${completed}`}}).exec();
+        res.status(200).send(result);
+    } catch (error) {
+        console.error(error);
+        res
+            .status(500)
+            .send({ message: "There was a problem trying to update completed task by ID" });
+    }
+});
+
 
 router.delete("/id/:id", async(req, res) => {
     try {  
@@ -51,7 +79,7 @@ router.delete("/id/:id", async(req, res) => {
         console.error(error);
         res
             .status(500)
-            .send({ message: "There was a problem trying to select task by ID" });
+            .send({ message: "There was a problem trying to delete task by ID" });
     }
 });
 
