@@ -83,4 +83,6 @@ router.delete("/id/:id", async(req, res) => {
     }
 });
 
+/* to do incluir validaciones de datos de entrada */
+
 module.exports = router;
